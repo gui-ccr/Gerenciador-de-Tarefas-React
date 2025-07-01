@@ -1,43 +1,43 @@
+/*
+  OBJETIVO DESTE COMPONENTE:
+  - Ser um formulário autocontido para adicionar novas tarefas.
+  - Ele tem seu próprio estado interno para controlar o que o usuário está digitando.
+  - Quando o formulário é enviado, ele não adiciona a tarefa sozinho. Em vez disso,
+    ele "avisa" o componente pai (App) sobre a nova tarefa, passando o texto para ele.
+*/
 
 import { useState } from 'react';
 
-// Este componente vai receber uma função do seu pai (App) através das props.
+// O componente recebe 'onAdicionarTarefa' como uma prop do App.
 function TaskForm(props) {
-  // Eu crio um estado LOCAL apenas para este componente.
-  // A única responsabilidade dele é controlar o que está sendo digitado no input.
+  // Este estado 'texto' só existe aqui dentro. Serve para controlar o input.
   const [texto, setTexto] = useState('');
 
-  // Esta função é chamada toda vez que o formulário é enviado.
+  // Esta função é executada quando o usuário envia o formulário.
   function handleSubmit(event) {
-    // 1. Previne o comportamento padrão do formulário de recarregar a página.
+    // Impede que o navegador recarregue a página (comportamento padrão de um form).
     event.preventDefault();
 
-    // 2. Verifica se o usuário de fato digitou algo.
-    if (texto.trim() === '') {
-      alert("Você não pode adicionar uma tarefa vazia!");
-      return; 
-    }
+    // Validação para não adicionar tarefas vazias.
+    if (texto.trim() === '') return;
 
-    // 3. Chama a função que foi passada pelo componente App via props,
-    //    enviando o texto do input como argumento para o App.
+    // Eu chamo a função que recebi via props, passando o texto atual do meu estado interno.
     props.onAdicionarTarefa(texto);
 
-    // 4. Limpa o campo de input após a tarefa ser adicionada.
+    // Eu limpo o meu estado local, e por consequência, o campo de input na tela.
     setTexto('');
   }
 
   return (
-    // Ao submeter o formulário (seja por clique ou Enter), eu chamo a função handleSubmit.
+    // O evento onSubmit do formulário está ligado à minha função handleSubmit.
     <form className="task-form" onSubmit={handleSubmit}>
-      <input 
+      <input
         type="text"
         placeholder="Adicionar uma nova tarefa..."
-        // CONCEITO: Componente Controlado
-        // O valor exibido no input está sempre "amarrado" à nossa variável de estado 'texto'.
+        // O valor do input é sempre um reflexo do meu estado 'texto'.
         value={texto}
-        // Sempre que o usuário digita uma letra, o evento onChange é disparado.
-        // Eu pego o novo valor do campo (event.target.value) e atualizo o meu estado.
-        // Isso causa uma re-renderização do componente, atualizando o valor no input.
+        // Cada vez que o usuário digita, o evento onChange atualiza meu estado 'texto'.
+        // Isso é o que chamamos de "Componente Controlado".
         onChange={(event) => setTexto(event.target.value)}
       />
       <button type="submit">Adicionar</button>
