@@ -1,35 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.jsx
+
+import { useState } from 'react';
+import './App.css';
+import TaskList from './TaskList.jsx'; // Estamos importando um componente que vamos criar a seguir
 
 function App() {
-  const [count, setCount] = useState(0)
+  // Usamos useState para criar nossa "fonte da verdade".
+  // 'tarefas' é o nosso array de dados.
+  // 'setTarefas' é a função que usaremos DEPOIS para modificar esses dados.
+  const [tarefas, setTarefas] = useState([
+    { id: 1, texto: 'Estudar os fundamentos do React', concluida: true },
+    { id: 2, texto: 'Criar meu primeiro projeto com Vite', concluida: true },
+    { id: 3, texto: 'Aprender sobre Componentes, Props e State', concluida: false }
+  ]);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="app-container">
+      <h1>Gerenciador de Tarefas</h1>
+      
+      {/* Aqui, passamos o nosso array 'tarefas' como uma prop para o componente TaskList */}
+      <TaskList tarefas={tarefas} />
+    </div>
   )
 }
 
-export default App
+export default App;
