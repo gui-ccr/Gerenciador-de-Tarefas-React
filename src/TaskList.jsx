@@ -5,13 +5,13 @@ import TaskItem from './TaskItem.jsx'; // Importamos o componente para um único
 function TaskList(props) {
   return (
     <ul className="task-list">
-      {/* Usamos .map() para transformar cada objeto do array em um componente <TaskItem /> */}
-      {props.tarefas.map(tarefa => (
-        // React exige uma 'key' única para cada item de uma lista para otimização.
-        // Nosso 'tarefa.id' é perfeito para isso.
-        // Também passamos o objeto 'tarefa' inteiro como uma prop para o TaskItem.
-        <TaskItem key={tarefa.id} tarefa={tarefa} />
-      ))}
+        {props.tarefas.map(tarefa => (
+            <TaskItem 
+            key={tarefa.id}
+            tarefa={tarefa}
+            onAlternarEstado={props.onAlternarEstado}
+            />
+        ))}
     </ul>
   );
 }
