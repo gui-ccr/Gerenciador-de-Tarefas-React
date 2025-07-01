@@ -29,6 +29,26 @@ function App() {
     setTarefas([...tarefas, novaTarefa]);
   }
 
+
+  // --- NOSSA NOVA FUNÇÃO ---
+  // Ela recebe o ID da tarefa que precisa ser alterada.
+  function alternarEstadoTarefa(id) {
+    // Eu uso .map() para criar um NOVO array.
+    const novasTarefas = tarefas.map(tarefa => {
+      // Se o ID da tarefa atual for igual ao ID que recebemos...
+      if (tarefa.id === id) {
+        // ...eu retorno um NOVO objeto, copiando tudo da tarefa antiga (...tarefa),
+        // mas invertendo o valor da propriedade 'concluida'.
+        return { ...tarefa, concluida: !tarefa.concluida };
+      }
+      // Se não for a tarefa que eu quero mudar, eu apenas a retorno sem modificação.
+      return tarefa;
+    });
+
+    // Eu atualizo o estado com o novo array que acabei de criar.
+    setTarefas(novasTarefas);
+  }
+
   return (
     <div className="app-container">
       <h1>Gerenciador de Tarefas</h1>
@@ -36,7 +56,10 @@ function App() {
       {/* 3. Eu renderizo o TaskForm e passo a função 'adicionarTarefa' como uma prop. */}
       <TaskForm onAdicionarTarefa={adicionarTarefa} />
 
-      <TaskList tarefas={tarefas} />
+      <TaskList tarefas={tarefas}
+      onAlternarEstado={alternarEstadoTarefa}
+      />
+
     </div>
   )
 }

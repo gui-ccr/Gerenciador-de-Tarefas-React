@@ -1,14 +1,16 @@
 // src/TaskItem.jsx
 
-// Este componente recebe um único objeto 'tarefa' via props.
 function TaskItem(props) {
-  // Verificamos se a tarefa está concluída para adicionar uma classe CSS específica.
+  // A lógica para a classe CSS continua a mesma.
   const itemClassName = `task-item ${props.tarefa.concluida ? 'completed' : ''}`;
 
   return (
-    <li className={itemClassName}>
+    // Adicionamos o evento onClick diretamente no elemento <li>
+    // Quando clicado, ele chama uma função de seta que, por sua vez,
+    // executa a função que veio do App, passando o ID desta tarefa específica.
+    <li className={itemClassName} onClick={() => props.onAlternarEstado(props.tarefa.id)}>
       <span>{props.tarefa.texto}</span>
-      {/* Os botões de ação virão aqui depois */}
+      {/* Os botões de deletar virão aqui depois */}
     </li>
   );
 }
