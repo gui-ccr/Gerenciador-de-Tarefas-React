@@ -1,0 +1,45 @@
+# Nome do nosso workflow
+name: Deploy to GitHub Pages
+
+# O gatilho: rodar sempre que houver um push na branch 'main'
+on:
+  push:
+    branches: [ "main" ]
+
+# Permissões necessárias para o robô poder publicar no GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Tarefas a serem executadas
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: 'npm'
+
+      - name: Instalar dependências
+        run: npm install
+
+      - name: Construir o projeto (npm run build)
+        run: npm run build
+
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload dos artefatos (da pasta 'dist')
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+          
+      - name: Deploy no GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
