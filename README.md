@@ -4,8 +4,8 @@ Esta é uma aplicação web moderna de Lista de Tarefas (To-Do List) construída
 
 Esta aplicação representa a evolução do meu projeto anterior, [construído com JavaScript Puro](https://github.com/gui-ccr/Gerenciador-de-Tarefas-JS), demonstrando a progressão para uma arquitetura mais moderna e escalável.
 
-### 🔗 Link para a Demonstração
-*[Link de Acesso](https://gui-ccr.github.io/Gerenciador-de-Tarefas-React/)*
+### 🔗 [Link para a Demonstração](https://gui-ccr.github.io/Gerenciador-de-Tarefas-React/)
+
 
 ---
 
