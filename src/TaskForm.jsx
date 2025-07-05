@@ -8,14 +8,11 @@
 
 import { useState } from 'react';
 
-// O componente recebe 'onAdicionarTarefa' como uma prop do App.
+
 function TaskForm(props) {
-  // Este estado 'texto' só existe aqui dentro. Serve para controlar o input.
   const [texto, setTexto] = useState('');
 
-  // Esta função é executada quando o usuário envia o formulário.
   function handleSubmit(event) {
-    // Impede que o navegador recarregue a página (comportamento padrão de um form).
     event.preventDefault();
 
     // Validação para não adicionar tarefas vazias.
@@ -44,5 +41,4 @@ function TaskForm(props) {
     </form>
   );
 }
-
 export default TaskForm;
